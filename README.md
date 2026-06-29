@@ -27,6 +27,8 @@
 
 完整內容請見：[10 天課程內容](lessons/10-day-challenge.md)
 
+市場測試文案請見：[市場測試招募包](marketing/launch-posts.md)
+
 ## 適合對象
 
 - 樂齡朋友：用英文學習幫大腦做訓練。
