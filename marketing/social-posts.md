@@ -1,5 +1,9 @@
 # 人人100英文字根 首波行銷貼文
 
+公開 App 體驗網址：
+
+https://godlovesyou127888-hub.github.io/renren-100-english-roots/
+
 ## 貼文 1：免費體驗
 
 很多人背英文單字，背了又忘。
@@ -14,7 +18,11 @@
 
 我整理了「人人100英文字根」樂齡版 App，字大、粗黑、彩色，還有中文與 KK 音標。
 
-先免費體驗，覺得有幫助再加入 10 天字根挑戰。
+先免費體驗：
+
+https://godlovesyou127888-hub.github.io/renren-100-english-roots/
+
+覺得有幫助，再加入 10 天字根挑戰。第一梯小班測試價 NT$499，想參加請 Line 私訊 Gary Wang。
 
 ## 貼文 2：樂齡友善
 
@@ -25,6 +33,12 @@
 「人人100英文字根」用大字、彩色卡片、中英對照與 KK 音標，幫助成人與樂齡學習者重新建立英文信心。
 
 每天 10 個字根，10 天打開英文單字的底層邏輯。
+
+免費 App：
+
+https://godlovesyou127888-hub.github.io/renren-100-english-roots/
+
+第一梯小班測試價 NT$499。
 
 ## 貼文 3：課程測試
 
@@ -39,4 +53,8 @@
 - 想保持大腦活化的樂齡朋友
 - 不想再死背單字的人
 
-第一梯只收小班，重點是陪大家真的看懂、真的用得上。
+第一梯只收小班，測試價 NT$499，重點是陪大家真的看懂、真的用得上。
+
+先試用 App：
+
+https://godlovesyou127888-hub.github.io/renren-100-english-roots/
