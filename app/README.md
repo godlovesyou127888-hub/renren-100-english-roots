@@ -2,6 +2,12 @@
 
 這是「人人100英文字根」的樂齡友善 App MVP。
 
+## 公開體驗網址
+
+GitHub Pages：
+
+https://godlovesyou127888-hub.github.io/renren-100-english-roots/
+
 ## 目前功能
 
 - 100 個完整英文字根
