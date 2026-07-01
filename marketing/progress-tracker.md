@@ -7,7 +7,7 @@
 ## 目前公開網址
 
 - GitHub repo：https://github.com/godlovesyou127888-hub/renren-100-english-roots/tree/main
-- GitHub Pages 預計網址：https://godlovesyou127888-hub.github.io/renren-100-english-roots/
+- GitHub Pages 正式網址：https://godlovesyou127888-hub.github.io/renren-100-english-roots/
 
 ## 進度看板
 
@@ -16,7 +16,7 @@
 | App MVP | 100 字根 App | 完成 | 持續測試手機畫面 | 100 張卡正常顯示 |
 | 教材內容 | 中英對照與 KK 音標 | 完成 | 抽查音標與中文 | 缺漏 0 |
 | GitHub | 公開 repo | 完成 | 維護 README | repo 可公開訪問 |
-| GitHub Pages | Pages 部署流程 | 已建立 | 到 GitHub 確認 Pages 已啟用 Actions | 取得公開網址 |
+| GitHub Pages | Pages 部署流程 | 完成 | 持續每日檢查公開網址 | 公開網址可開，100 張卡正常顯示 |
 | Google Play | 商店文案 | 完成 | 製作截圖 | 文案可貼進 Console |
 | Google Play | 隱私權政策 | 完成 | 發布公開網址 | Play Console 可填入 |
 | Android | App Bundle | 待做 | 選 Capacitor 或 Bubblewrap 包裝 | 產出 .aab |
@@ -42,7 +42,7 @@
 
 每天檢查一次：
 
-- GitHub Pages 是否可開
+- GitHub Pages 是否可開：https://godlovesyou127888-hub.github.io/renren-100-english-roots/
 - App 是否仍顯示 100 張字根卡
 - 行銷追蹤表是否更新
 - 下一個最小現金流行動是什麼
