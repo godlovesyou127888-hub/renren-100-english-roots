@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#166534">
+  <meta name="description" content="人人100英文字根，樂齡友善的英文字根學習 App。">
+  <title>人人100英文字根 App</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div>
+      <p class="eyebrow">Skywalker Co., Ltd.</p>
+      <h1>人人100英文字根</h1>
+      <p class="subtitle">字大、粗黑、彩色、圖文並茂，長輩也能安心學英文。</p>
+    </div>
+    <button id="seniorMode" class="pill-button" type="button" aria-pressed="true">樂齡大字</button>
+  </header>
+
+  <main>
+    <section class="hero" aria-label="今日學習">
+      <div class="hero-copy">
+        <p class="tag">10 天完成 100 個核心字根</p>
+        <h2>每天 10 個字根，看懂一串英文單字。</h2>
+        <p>每張卡都有字根意思、記憶提示、英文例字、中文解釋與 KK 音標。</p>
+      </div>
+      <div class="hero-badge" aria-hidden="true">
+        <span>100</span>
+        <strong>Roots</strong>
+      </div>
+    </section>
+
+    <section class="controls" aria-label="搜尋與篩選">
+      <label class="search-box">
+        <span>搜尋字根或單字</span>
+        <input id="searchInput" type="search" placeholder="例如：bio、portable、生命">
+      </label>
+      <div id="themeFilters" class="filters" aria-label="主題篩選"></div>
+    </section>
+
+    <section class="progress-panel" aria-label="學習進度">
+      <div>
+        <strong id="resultCount">100</strong>
+        <span>個字根</span>
+      </div>
+      <div>
+        <strong id="favoriteCount">0</strong>
+        <span>個收藏</span>
+      </div>
+      <button id="showFavorites" class="text-button" type="button" aria-pressed="false">只看收藏</button>
+    </section>
+
+    <section id="rootGrid" class="root-grid" aria-live="polite"></section>
+  </main>
+
+  <footer>
+    <p>人人100英文字根 | 公開教材專案</p>
+    <a href="https://github.com/godlovesyou127888-hub/renren-100-english-roots/tree/main">GitHub 專案連結</a>
+  </footer>
+
+  <script src="roots-data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
