@@ -244,9 +244,10 @@
                 <input type="hidden" name="_subject" value="人人100英文字根小班報名與測驗結果">
                 <input type="hidden" name="_template" value="table">
                 <input type="hidden" name="_captcha" value="false">
-                <input type="hidden" name="_next" value="https://godlovesyou127888-hub.github.io/renren-100-english-roots/">
+                <input type="hidden" name="_next" value="https://github.com/godlovesyou127888-hub/renren-100-english-roots">
                 <input type="hidden" name="_cc" value="">
                 <input type="hidden" name="_autoresponse" value="已收到你的人人100英文字根測驗與小班報名資料。老師會依照你的測驗結果安排後續學習建議。">
+                <input type="hidden" name="專案網址" value="https://github.com/godlovesyou127888-hub/renren-100-english-roots">
                 <input type="hidden" name="報名內容" value="我對字根小班有興趣">
                 <input type="hidden" name="測驗類型" value="${getQuizLabel()}">
                 <input type="hidden" name="答對題數" value="${score}">
