@@ -237,6 +237,22 @@
             <div class="signup-cta">
               <strong>想跟老師 10 天學完 100 個字根？</strong>
               <p>第一梯測試價 NT$499，請 EMAIL 至 godlovesyou127888@gmail.com：我要參加字根小班。</p>
+              <form class="signup-form" action="https://formsubmit.co/godlovesyou127888@gmail.com" method="POST">
+                <input type="hidden" name="_subject" value="人人100英文字根小班報名">
+                <input type="hidden" name="_template" value="table">
+                <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="_next" value="https://godlovesyou127888-hub.github.io/renren-100-english-roots/">
+                <input type="hidden" name="報名內容" value="我要參加字根小班">
+                <label>
+                  <span>姓名</span>
+                  <input name="姓名" type="text" autocomplete="name" required placeholder="請輸入姓名">
+                </label>
+                <label>
+                  <span>Email</span>
+                  <input name="email" type="email" autocomplete="email" required placeholder="請輸入 Email">
+                </label>
+                <button class="primary-button signup-submit" type="submit">送出報名資料</button>
+              </form>
             </div>
           </div>
         `;
