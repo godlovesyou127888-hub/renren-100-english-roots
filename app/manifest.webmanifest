@@ -1,11 +1,14 @@
 {
   "name": "人人100英文字根",
   "short_name": "100字根",
-  "description": "樂齡友善的英文字根學習 App，包含 100 個字根、中英對照與 KK 音標。",
+  "description": "樂齡友善的英文字根學習 App，10 天學完 100 個常用字根，含中英對照、KK 音標、每日進度與四選一測驗。",
   "start_url": "./index.html",
+  "scope": "./",
   "display": "standalone",
   "background_color": "#fffef8",
   "theme_color": "#166534",
+  "orientation": "portrait",
+  "lang": "zh-Hant",
   "icons": [
     {
       "src": "assets/icon.svg",
