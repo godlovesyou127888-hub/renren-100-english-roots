@@ -1,0 +1,14 @@
+[
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.skywalker.renrenroots",
+      "sha256_cert_fingerprints": [
+        "FB:0B:AA:E1:46:3B:1B:A4:2A:B6:0F:7A:DF:4B:B1:7B:77:43:8C:53:8D:D0:66:CA:6F:DF:AA:89:67:2D:4B:13"
+      ]
+    }
+  }
+]
