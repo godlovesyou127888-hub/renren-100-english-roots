@@ -1,7 +1,8 @@
-const CACHE_NAME = "renren-100-roots-v8";
+const CACHE_NAME = "renren-100-roots-v9";
 const ASSETS = [
   "./",
   "./index.html",
+  "./privacy-policy.html",
   "./styles.css",
   "./app.js",
   "./roots-data.js",
