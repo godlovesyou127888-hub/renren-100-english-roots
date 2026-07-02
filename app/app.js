@@ -10,6 +10,9 @@
     const rootPage = document.querySelector("#rootPage");
     const searchInput = document.querySelector("#searchInput");
     const filters = document.querySelector("#themeFilters");
+    const dayFilters = document.querySelector("#dayFilters");
+    const dayTitle = document.querySelector("#dayTitle");
+    const dayRange = document.querySelector("#dayRange");
     const resultCount = document.querySelector("#resultCount");
     const favoriteCount = document.querySelector("#favoriteCount");
     const seniorMode = document.querySelector("#seniorMode");
@@ -25,20 +28,24 @@
     const quizScore = document.querySelector("#quizScore");
     const quizCard = document.querySelector("#quizCard");
     const quizFeedback = document.querySelector("#quizFeedback");
+    const quizModeText = document.querySelector("#quizModeText");
 
     const favoriteKey = "renren-root-favorites";
     const seniorKey = "renren-senior-mode";
-    const quizTotal = 10;
+    const rootsPerDay = 10;
 
     let activeTheme = "全部";
+    let activeDay = 1;
     let favoritesOnly = false;
     let currentIndex = 0;
-    let filteredRoots = roots.slice();
+    let filteredRoots = roots.slice(0, rootsPerDay);
     let favorites = new Set(JSON.parse(localStorage.getItem(favoriteKey) || "[]"));
+    let quizMode = "day1";
     let quizQuestions = [];
     let quizIndex = 0;
     let score = 0;
     let answered = false;
+    const totalDays = Math.ceil(roots.length / rootsPerDay);
     const themes = ["全部", ...Array.from(new Set(roots.map((item) => item.theme)))];
 
     function normalize(value) {
@@ -59,6 +66,23 @@
       return copy;
     }
 
+    function getDayRoots(day) {
+      const start = (day - 1) * rootsPerDay;
+      return roots.slice(start, start + rootsPerDay);
+    }
+
+    function getQuizSource() {
+      if (quizMode === "day1") return getDayRoots(1);
+      if (quizMode === "day2") return getDayRoots(2);
+      return roots;
+    }
+
+    function getQuizLabel() {
+      if (quizMode === "day1") return "第 1 天測驗";
+      if (quizMode === "day2") return "第 2 天測驗";
+      return "全部混合測驗";
+    }
+
     function matchesSearch(item, query) {
       if (!query) return true;
       const haystack = [
@@ -73,7 +97,7 @@
 
     function getVisibleRoots() {
       const query = normalize(searchInput.value);
-      return roots.filter((item) => {
+      return getDayRoots(activeDay).filter((item) => {
         const themeOk = activeTheme === "全部" || item.theme === activeTheme;
         const favoriteOk = !favoritesOnly || favorites.has(item.id);
         return themeOk && favoriteOk && matchesSearch(item, query);
@@ -89,6 +113,21 @@
       catalogTab.classList.toggle("active", isCatalog);
       readerTab.classList.toggle("active", isReader);
       quizTab.classList.toggle("active", viewName === "quiz");
+    }
+
+    function renderDayFilters() {
+      dayFilters.innerHTML = Array.from({ length: totalDays }, (_, index) => {
+        const day = index + 1;
+        return `
+          <button class="day-button ${day === activeDay ? "active" : ""}" type="button" data-day="${day}">
+            第 ${day} 天
+          </button>
+        `;
+      }).join("");
+      const start = (activeDay - 1) * rootsPerDay + 1;
+      const end = Math.min(activeDay * rootsPerDay, roots.length);
+      dayTitle.textContent = `第 ${activeDay} 天`;
+      dayRange.textContent = `字根 ${start}-${end}`;
     }
 
     function renderFilters() {
@@ -127,7 +166,7 @@
     }
 
     function renderReader() {
-      const item = filteredRoots[currentIndex] || roots[0];
+      const item = filteredRoots[currentIndex] || getDayRoots(activeDay)[0];
       if (!item) {
         rootPage.innerHTML = '<div class="empty">目前沒有字根資料。</div>';
         return;
@@ -142,7 +181,7 @@
         </li>
       `).join("");
 
-      pageCounter.textContent = `第 ${currentIndex + 1} / ${filteredRoots.length || roots.length} 頁`;
+      pageCounter.textContent = `第 ${activeDay} 天｜第 ${currentIndex + 1} / ${filteredRoots.length || rootsPerDay} 頁`;
       prevPage.disabled = currentIndex === 0;
       nextPage.disabled = currentIndex >= filteredRoots.length - 1;
 
@@ -162,23 +201,26 @@
       `;
     }
 
-    function makeQuizQuestion(answer) {
-      const wrongOptions = shuffle(roots.filter((item) => item.id !== answer.id))
+    function makeQuizQuestion(answer, source) {
+      const wrongOptions = shuffle(source.filter((item) => item.id !== answer.id))
+        .concat(shuffle(roots.filter((item) => item.id !== answer.id)))
         .map((item) => item.meaning)
         .filter((meaning, index, list) => meaning !== answer.meaning && list.indexOf(meaning) === index)
         .slice(0, 3);
-      return {
-        answer,
-        options: shuffle([answer.meaning, ...wrongOptions]),
-      };
+      return { answer, options: shuffle([answer.meaning, ...wrongOptions]) };
     }
 
     function startQuiz() {
-      quizQuestions = shuffle(roots).slice(0, quizTotal).map(makeQuizQuestion);
+      const source = getQuizSource();
+      quizQuestions = shuffle(source).slice(0, Math.min(rootsPerDay, source.length)).map((item) => makeQuizQuestion(item, source));
       quizIndex = 0;
       score = 0;
       answered = false;
       quizScore.textContent = "0";
+      quizModeText.textContent = getQuizLabel();
+      document.querySelectorAll("[data-quiz-mode]").forEach((button) => {
+        button.classList.toggle("active", button.dataset.quizMode === quizMode);
+      });
       renderQuiz();
       showView("quiz");
     }
@@ -192,10 +234,16 @@
             <h2>測驗完成！</h2>
             <p>這次答對 <strong>${score}</strong> / ${quizQuestions.length} 題。</p>
             <p>${score >= 8 ? "很棒，可以進入下一組字根。" : "沒關係，回到目錄再複習一次。"}</p>
+            <div class="signup-cta">
+              <strong>想跟老師 10 天學完 100 個字根？</strong>
+              <p>第一梯測試價 NT$499，請 Line 私訊：我要參加字根小班。</p>
+            </div>
           </div>
         `;
         quizFeedback.textContent = "";
+        quizFeedback.className = "quiz-feedback";
         nextQuestion.textContent = "再測一次";
+        nextQuestion.disabled = false;
         return;
       }
 
@@ -249,6 +297,15 @@
       localStorage.setItem(seniorKey, enabled ? "1" : "0");
     }
 
+    dayFilters.addEventListener("click", (event) => {
+      const button = event.target.closest("[data-day]");
+      if (!button) return;
+      activeDay = Number(button.dataset.day);
+      currentIndex = 0;
+      renderDayFilters();
+      renderCatalog();
+    });
+
     filters.addEventListener("click", (event) => {
       const button = event.target.closest("[data-theme]");
       if (!button) return;
@@ -270,11 +327,7 @@
       const button = event.target.closest("[data-fav-id]");
       if (!button) return;
       const id = Number(button.dataset.favId);
-      if (favorites.has(id)) {
-        favorites.delete(id);
-      } else {
-        favorites.add(id);
-      }
+      if (favorites.has(id)) favorites.delete(id); else favorites.add(id);
       saveFavorites();
       renderCatalog();
       renderReader();
@@ -286,11 +339,14 @@
       answerQuiz(button.dataset.answer);
     });
 
-    searchInput.addEventListener("input", () => {
-      currentIndex = 0;
-      renderCatalog();
+    document.querySelectorAll("[data-quiz-mode]").forEach((button) => {
+      button.addEventListener("click", () => {
+        quizMode = button.dataset.quizMode;
+        startQuiz();
+      });
     });
 
+    searchInput.addEventListener("input", () => { currentIndex = 0; renderCatalog(); });
     showFavorites.addEventListener("click", () => {
       favoritesOnly = !favoritesOnly;
       showFavorites.setAttribute("aria-pressed", String(favoritesOnly));
@@ -298,50 +354,24 @@
       currentIndex = 0;
       renderCatalog();
     });
-
-    startReading.addEventListener("click", () => {
-      currentIndex = 0;
-      renderReader();
-      showView("reader");
-    });
-
+    startReading.addEventListener("click", () => { currentIndex = 0; renderReader(); showView("reader"); });
     catalogTab.addEventListener("click", () => showView("catalog"));
     readerTab.addEventListener("click", () => showView("reader"));
-    quizTab.addEventListener("click", () => {
-      if (!quizQuestions.length || quizIndex >= quizQuestions.length) startQuiz();
-      showView("quiz");
-    });
+    quizTab.addEventListener("click", () => showView("quiz"));
     restartQuiz.addEventListener("click", startQuiz);
     backToCatalog.addEventListener("click", () => showView("catalog"));
     seniorMode.addEventListener("click", () => setSeniorMode(!document.body.classList.contains("senior")));
-
-    prevPage.addEventListener("click", () => {
-      if (currentIndex > 0) {
-        currentIndex -= 1;
-        renderReader();
-      }
-    });
-
-    nextPage.addEventListener("click", () => {
-      if (currentIndex < filteredRoots.length - 1) {
-        currentIndex += 1;
-        renderReader();
-      }
-    });
-
+    prevPage.addEventListener("click", () => { if (currentIndex > 0) { currentIndex -= 1; renderReader(); } });
+    nextPage.addEventListener("click", () => { if (currentIndex < filteredRoots.length - 1) { currentIndex += 1; renderReader(); } });
     nextQuestion.addEventListener("click", () => {
-      if (!quizQuestions[quizIndex]) {
-        startQuiz();
-        return;
-      }
+      if (!quizQuestions[quizIndex]) { startQuiz(); return; }
       quizIndex += 1;
       renderQuiz();
     });
 
-    if ("serviceWorker" in navigator && location.protocol !== "file:") {
-      navigator.serviceWorker.register("sw.js");
-    }
+    if ("serviceWorker" in navigator && location.protocol !== "file:") navigator.serviceWorker.register("sw.js");
 
+    renderDayFilters();
     renderFilters();
     saveFavorites();
     setSeniorMode(localStorage.getItem(seniorKey) !== "0");
