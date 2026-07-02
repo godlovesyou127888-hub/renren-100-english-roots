@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#166534">
-  <meta name="description" content="人人100英文字根樂齡版 App，目錄式手機教材，一頁一頁學會 100 個英文字根，並用四選一測驗複習。">
+  <meta name="description" content="人人100英文字根樂齡版 App，10 天每日進度、單頁閱讀與四選一測驗。">
   <title>人人100英文字根 App</title>
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="stylesheet" href="styles.css">
@@ -16,7 +16,7 @@
         <div>
           <p class="eyebrow">Skywalker Co., Ltd.</p>
           <h1>人人100英文字根</h1>
-          <p class="subtitle">樂齡友善，一頁一頁看懂英文單字。</p>
+          <p class="subtitle">10 天，每天 10 個字根，一頁一頁學。</p>
         </div>
         <button id="seniorMode" class="round-button" type="button" aria-pressed="true">大字</button>
       </header>
@@ -29,29 +29,37 @@
 
       <section id="catalogView" class="screen active" aria-label="字根目錄">
         <div class="hero-card">
-          <span class="hero-number">100</span>
+          <span class="hero-number">10</span>
           <div>
             <p class="tag">10 天字根樂齡英文小班</p>
-            <h2>先看目錄，再一頁一頁學。</h2>
-            <p>每天 10 個字根，搭配中英對照與 KK 音標。</p>
+            <h2>今天只學 10 個。</h2>
+            <p>先完成每天進度，再用測驗確認記住了。</p>
           </div>
         </div>
 
+        <section class="day-panel" aria-label="每日進度">
+          <div class="section-title">
+            <strong id="dayTitle">第 1 天</strong>
+            <span id="dayRange">字根 1-10</span>
+          </div>
+          <div id="dayFilters" class="day-filters"></div>
+        </section>
+
         <label class="search-box">
-          <span>搜尋字根、單字、中文</span>
+          <span>搜尋今天的字根、單字、中文</span>
           <input id="searchInput" type="search" placeholder="例如 bio、生命、biology">
         </label>
 
         <div id="themeFilters" class="filters" aria-label="主題分類"></div>
 
         <div class="catalog-summary">
-          <span><strong id="resultCount">100</strong> 個字根</span>
+          <span><strong id="resultCount">10</strong> 個字根</span>
           <span><strong id="favoriteCount">0</strong> 個收藏</span>
         </div>
 
         <div class="catalog-actions">
           <button id="showFavorites" class="outline-button" type="button" aria-pressed="false">只看收藏</button>
-          <button id="startReading" class="primary-button" type="button">從第 1 頁開始</button>
+          <button id="startReading" class="primary-button" type="button">從今天第 1 頁開始</button>
         </div>
 
         <ol id="catalogList" class="catalog-list" aria-live="polite"></ol>
@@ -60,7 +68,7 @@
       <section id="readerView" class="screen" aria-label="單頁閱讀">
         <div class="reader-progress">
           <button id="backToCatalog" class="outline-button small" type="button">回目錄</button>
-          <span id="pageCounter">第 1 / 100 頁</span>
+          <span id="pageCounter">第 1 / 10 頁</span>
         </div>
 
         <article id="rootPage" class="root-page" aria-live="polite"></article>
@@ -80,13 +88,24 @@
           <button id="restartQuiz" class="outline-button small" type="button">重新開始</button>
         </div>
 
+        <section class="quiz-mode-panel" aria-label="測驗分級">
+          <div class="section-title">
+            <strong>測驗範圍</strong>
+            <span id="quizModeText">第 1 天測驗</span>
+          </div>
+          <div class="quiz-mode-buttons">
+            <button class="quiz-mode active" type="button" data-quiz-mode="day1">第 1 天測驗</button>
+            <button class="quiz-mode" type="button" data-quiz-mode="day2">第 2 天測驗</button>
+            <button class="quiz-mode" type="button" data-quiz-mode="all">全部混合測驗</button>
+          </div>
+        </section>
+
         <div class="quiz-score">
           <span id="quizCounter">第 1 / 10 題</span>
           <span>答對 <strong id="quizScore">0</strong> 題</span>
         </div>
 
         <article id="quizCard" class="quiz-card" aria-live="polite"></article>
-
         <div id="quizFeedback" class="quiz-feedback" aria-live="polite"></div>
 
         <div class="reader-controls">
