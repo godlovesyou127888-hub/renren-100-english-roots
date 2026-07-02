@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#166534">
-  <meta name="description" content="人人100英文字根樂齡版 App，目錄式手機教材，一頁一頁學會 100 個英文字根。">
+  <meta name="description" content="人人100英文字根樂齡版 App，目錄式手機教材，一頁一頁學會 100 個英文字根，並用四選一測驗複習。">
   <title>人人100英文字根 App</title>
   <link rel="manifest" href="manifest.webmanifest">
   <link rel="stylesheet" href="styles.css">
@@ -21,9 +21,10 @@
         <button id="seniorMode" class="round-button" type="button" aria-pressed="true">大字</button>
       </header>
 
-      <nav class="tabbar" aria-label="閱讀模式">
+      <nav class="tabbar" aria-label="學習模式">
         <button id="catalogTab" class="tab active" type="button">目錄</button>
         <button id="readerTab" class="tab" type="button">閱讀</button>
+        <button id="quizTab" class="tab" type="button">測驗</button>
       </nav>
 
       <section id="catalogView" class="screen active" aria-label="字根目錄">
@@ -67,6 +68,29 @@
         <div class="reader-controls">
           <button id="prevPage" class="outline-button" type="button">上一頁</button>
           <button id="nextPage" class="primary-button" type="button">下一頁</button>
+        </div>
+      </section>
+
+      <section id="quizView" class="screen" aria-label="四選一測驗">
+        <div class="quiz-top">
+          <div>
+            <p class="tag">四選一小測驗</p>
+            <h2>看字根，選意思。</h2>
+          </div>
+          <button id="restartQuiz" class="outline-button small" type="button">重新開始</button>
+        </div>
+
+        <div class="quiz-score">
+          <span id="quizCounter">第 1 / 10 題</span>
+          <span>答對 <strong id="quizScore">0</strong> 題</span>
+        </div>
+
+        <article id="quizCard" class="quiz-card" aria-live="polite"></article>
+
+        <div id="quizFeedback" class="quiz-feedback" aria-live="polite"></div>
+
+        <div class="reader-controls">
+          <button id="nextQuestion" class="primary-button" type="button">下一題</button>
         </div>
       </section>
     </section>
