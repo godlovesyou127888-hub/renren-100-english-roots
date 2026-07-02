@@ -236,7 +236,7 @@
             <p>${score >= 8 ? "很棒，可以進入下一組字根。" : "沒關係，回到目錄再複習一次。"}</p>
             <div class="signup-cta">
               <strong>想跟老師 10 天學完 100 個字根？</strong>
-              <p>第一梯測試價 NT$499，請 Line 私訊：我要參加字根小班。</p>
+              <p>第一梯測試價 NT$499，請 EMAIL 至 godlovesyou127888@gmail.com：我要參加字根小班。</p>
             </div>
           </div>
         `;
