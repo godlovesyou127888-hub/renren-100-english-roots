@@ -228,21 +228,31 @@
     function renderQuiz() {
       const question = quizQuestions[quizIndex];
       if (!question) {
+        const total = quizQuestions.length;
+        const percent = total ? Math.round((score / total) * 100) : 0;
+        const resultText = `${getQuizLabel()}：答對 ${score} / ${total} 題，正確率 ${percent}%`;
         quizCounter.textContent = "完成";
         quizCard.innerHTML = `
           <div class="quiz-finish">
             <h2>測驗完成！</h2>
-            <p>這次答對 <strong>${score}</strong> / ${quizQuestions.length} 題。</p>
+            <p>這次答對 <strong>${score}</strong> / ${total} 題，正確率 <strong>${percent}%</strong>。</p>
             <p>${score >= 8 ? "很棒，可以進入下一組字根。" : "沒關係，回到目錄再複習一次。"}</p>
             <div class="signup-cta">
               <strong>想跟老師 10 天學完 100 個字根？</strong>
-              <p>第一梯測試價 NT$499，請 EMAIL 至 godlovesyou127888@gmail.com：我要參加字根小班。</p>
+              <p>第一梯測試價 NT$499。填好姓名和 Email 後，系統會把測驗結果寄給你，也會備份一份給老師。</p>
               <form class="signup-form" action="https://formsubmit.co/godlovesyou127888@gmail.com" method="POST">
-                <input type="hidden" name="_subject" value="人人100英文字根小班報名">
+                <input type="hidden" name="_subject" value="人人100英文字根小班報名與測驗結果">
                 <input type="hidden" name="_template" value="table">
                 <input type="hidden" name="_captcha" value="false">
                 <input type="hidden" name="_next" value="https://godlovesyou127888-hub.github.io/renren-100-english-roots/">
+                <input type="hidden" name="_cc" value="">
+                <input type="hidden" name="_autoresponse" value="已收到你的人人100英文字根測驗與小班報名資料。老師會依照你的測驗結果安排後續學習建議。">
                 <input type="hidden" name="報名內容" value="我要參加字根小班">
+                <input type="hidden" name="測驗類型" value="${getQuizLabel()}">
+                <input type="hidden" name="答對題數" value="${score}">
+                <input type="hidden" name="總題數" value="${total}">
+                <input type="hidden" name="正確率" value="${percent}%">
+                <input type="hidden" name="測驗結果" value="${resultText}">
                 <label>
                   <span>姓名</span>
                   <input name="姓名" type="text" autocomplete="name" required placeholder="請輸入姓名">
@@ -251,7 +261,7 @@
                   <span>Email</span>
                   <input name="email" type="email" autocomplete="email" required placeholder="請輸入 Email">
                 </label>
-                <button class="primary-button signup-submit" type="submit">送出報名資料</button>
+                <button class="primary-button signup-submit" type="submit">寄出測驗結果與報名資料</button>
               </form>
             </div>
           </div>
@@ -353,6 +363,14 @@
       const button = event.target.closest("[data-answer]");
       if (!button) return;
       answerQuiz(button.dataset.answer);
+    });
+
+    quizCard.addEventListener("submit", (event) => {
+      const form = event.target.closest(".signup-form");
+      if (!form) return;
+      const email = form.querySelector('input[name="email"]');
+      const cc = form.querySelector('input[name="_cc"]');
+      if (email && cc) cc.value = email.value.trim();
     });
 
     document.querySelectorAll("[data-quiz-mode]").forEach((button) => {
